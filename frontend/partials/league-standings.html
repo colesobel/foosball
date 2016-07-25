@@ -1,0 +1,34 @@
+<p class="display-1 page-header">League Standings!</p>
+
+<table class="table table-striped">
+    <thead>
+        <th>
+            Team Name
+        </th>
+        <th>
+            Wins
+        </th>
+        <th>
+            Losses
+        </th>
+        <th>
+            Win Percentage
+        </th>
+    </thead>
+    <tbody>
+        <tr ng-repeat="team in ls.standings">
+            <td>
+                {{team.team_name}}
+            </td>
+            <td>
+                {{team.wins}}
+            </td>
+            <td>
+                {{team.losses | number:0}}
+            </td>
+            <td>
+                {{team.win_percentage * 100 | number:0 }}%
+            </td>
+        </tr>
+    </tbody>
+</table>

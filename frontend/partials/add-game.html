@@ -1,0 +1,36 @@
+<div class="container">
+        <div class="row add-game-row">
+            <div class="col-md-6">
+                <p class="h1">
+                    Winner
+                </p>
+                <label for="winning_team">Winning Team</label>
+                <select name="winning_team" class="form-control" ng-model="ag.winning_team">
+                    <option disabled="">All Teams</option>
+                    <option ng-repeat="team in ag.teams">{{team.team_name}}</option>
+                </select> <br><br>
+                <label for="winning_goals">Winner Score</label>
+                <input class="form-control" type="number" name="winning_goals" max="10" min="0" ng-model="ag.winning_goals">
+            </div>
+            <div class="col-md-6">
+                <p class="h1">
+                    Loser
+                </p>
+                <label for="losing_team">Losing Team</label>
+                <select name="losing_team" class="form-control" ng-model="ag.losing_team">
+                    <option disabled="">All Teams</option>
+                    <option ng-repeat="team in ag.teams">{{team.team_name}}</option>
+                </select> <br><br>
+                <label for="losing_goals">Loser Score</label>
+                <input class="form-control" type="number" name="losing_goals" max="10" min="0" ng-model="ag.losing_goals">
+            </div>
+        </div>
+        <div class="submit row">
+            <input class="btn btn-success" type="button" value="Add Game!"ng-click="ag.createGame()">
+        </div>
+        <div class="row create-game-notification" ng-show="ag.created">
+            <div class="alert alert-success">
+                Game Created Successfully!
+            </div>
+        </div>
+</div>

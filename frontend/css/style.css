@@ -1,0 +1,41 @@
+.add-team-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 90vw;
+  margin: 0 auto;
+}
+
+.add-player {
+  width: 400px;
+}
+
+
+.add-team-button {
+  margin: 0 auto;
+}
+
+.navbar-item {
+  margin: 0 50px;
+  width: 200px;
+}
+
+
+.add-game-row {
+  /*border: 1px solid black;*/
+  /*display: flex;*/
+}
+
+.submit {
+  margin-top: 5%;
+  text-align: center;
+}
+
+.create-game-notification {
+  text-align: center;
+  margin-top: 5%;
+}
+
+.page-header {
+  font-size: 3em;
+}

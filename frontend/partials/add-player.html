@@ -1,0 +1,21 @@
+<div class="add-team-container">
+    <h1 class="h1">Register A Player!</h1>
+    <hr>
+    <br>
+    <form>
+        <div class="form-group row">
+            <div class="col-md-10">
+                <input type="text" class="form-control add-player" placeholder="Name" ng-model="ap.name">
+            </div>
+        </div>
+        <button type="button" class="btn btn-primary add-team-button" ng-click="ap.createPlayer()">Add Player!</button>
+    </form>
+    <br><br>
+    <div class="row">
+        <div class="col-md-8">
+            <div class="alert alert-success" ng-show="ap.created">
+                <strong>Success!</strong> Head to your personal stats page!
+            </div>
+        </div>
+    </div>
+</div>
