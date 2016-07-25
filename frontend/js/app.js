@@ -39,6 +39,12 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
       controller: 'leagueStandingsController',
       controllerAs: 'ls'
     })
+    .state('playerStandings', {
+      url: '/playerStandings',
+      templateUrl: '/partials/player-standings.html',
+      controller: 'playerStandingsController',
+      controllerAs: 'ps'
+    })
     .state('teamStats', {
       url: '/teamStats',
       templateUrl: '/partials/team-stats.html',

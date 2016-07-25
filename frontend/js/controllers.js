@@ -95,3 +95,10 @@ angular.module('myApp.controllers', [])
 .controller('teamStatsController', [function() {
 
 }])
+
+.controller('playerStandingsController', ['$http', function($http) {
+  var self = this
+  $http.get('http://localhost:3000/standings/player').then(function(data) {
+    self.standings = data.data
+  })
+}])

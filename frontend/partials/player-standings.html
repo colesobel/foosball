@@ -1,0 +1,52 @@
+<p class="display-1 page-header">Player Standings!</p>
+
+<table class="table table-striped">
+    <thead>
+        <th>
+            Player Name
+        </th>
+        <th>
+            Wins
+        </th>
+        <th>
+            Losses
+        </th>
+        <th>
+            Goals For
+        </th>
+        <th>
+            Goals Against
+        </th>
+        <th>
+            Win Percentage
+        </th>
+        <th>
+            Goals For Percentage
+        </th>
+    </thead>
+    <tbody>
+        <tr ng-repeat="player in ps.standings">
+            <td>
+                {{player.name}}
+            </td>
+            <td>
+                {{player.wins}}
+            </td>
+            <td>
+                {{player.losses}}
+            </td>
+            <td>
+                {{player.goals_for}}
+            </td>
+            <td>
+                {{player.goals_against}}
+            </td>
+            <td>
+                {{player.win_percentage * 100 | number:0}}%
+            </td>
+            <td>
+                {{player.goals_for_percentage * 100 | number:0 }}%
+            </td>
+        </tr>
+    </tbody>
+</table>
