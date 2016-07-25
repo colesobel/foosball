@@ -90,6 +90,12 @@ angular.module('myApp.controllers', [])
   $http.get('http://localhost:3000/standings/team').then(function(data) {
     self.standings = data.data
   })
+  this.sortColumn = ''
+  this.asc = false
+  this.sortData = function(column) {
+    self.asc = self.sortColumn == column ? !self.asc : true
+    self.sortColumn = column
+  }
 }])
 
 .controller('teamStatsController', [function() {
@@ -101,4 +107,11 @@ angular.module('myApp.controllers', [])
   $http.get('http://localhost:3000/standings/player').then(function(data) {
     self.standings = data.data
   })
+  this.sortColumn = ''
+  this.asc = false
+  this.sortData = function(column) {
+    self.asc = self.sortColumn == column ? !self.asc : true
+    self.sortColumn = column
+  }
+
 }])

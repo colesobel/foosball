@@ -2,30 +2,30 @@
 
 <table class="table table-striped">
     <thead>
-        <th>
+        <th class="clickable" ng-click="ps.sortData('name')">
             Player Name
         </th>
-        <th>
+        <th class="clickable" ng-click="ps.sortData('wins')">
             Wins
         </th>
-        <th>
+        <th class="clickable" ng-click="ps.sortData('losses')">
             Losses
         </th>
-        <th>
-            Goals For
+        <th class="clickable" ng-click="ps.sortData('goals_for')">
+            Goals-For
         </th>
-        <th>
-            Goals Against
+        <th class="clickable" ng-click="ps.sortData('goals_against')">
+            Goals-Against
         </th>
-        <th>
+        <th class="clickable" ng-click="ps.sortData('win_percentage')">
             Win Percentage
         </th>
-        <th>
-            Goals For Percentage
+        <th class="clickable" ng-click="ps.sortData('goals_for_percentage')">
+            Goals-For Percentage
         </th>
     </thead>
     <tbody>
-        <tr ng-repeat="player in ps.standings">
+        <tr ng-repeat="player in ps.standings | orderBy: ps.sortColumn: ps.asc">
             <td>
                 {{player.name}}
             </td>
