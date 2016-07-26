@@ -15,6 +15,15 @@ router.get('/', function(req, res, next) {
   })
 });
 
+router.get('/:id', function(req, res, next) {
+  Players.playerRow(req.params.id).then(function(player) {
+    res.json(player.rows[0])
+  })
+});
+
+
+
+
 
 
 

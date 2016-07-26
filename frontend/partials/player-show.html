@@ -1,0 +1,54 @@
+<p class="display-1 page-header">{{pshow.player.name}}</p>
+
+<table class="table table-striped">
+    <thead>
+        <th>
+            Team Name
+        </th>
+        <th>
+            Wins
+        </th>
+        <th>
+            Losses
+        </th>
+        <th>
+            Goals-For
+        </th>
+        <th>
+            Goals-Against
+        </th>
+        <th>
+            Win Percentage
+        </th>
+        <th>
+            Goals-For Percentage
+        </th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                {{pshow.player.name}}
+            </td>
+            <td>
+                {{pshow.player.wins}}
+            </td>
+            <td>
+                {{pshow.player.losses}}
+            </td>
+            <td>
+                {{pshow.player.goals_for}}
+            </td>
+            <td>
+                {{pshow.player.goals_against}}
+            </td>
+            <td>
+                {{pshow.player.win_percentage * 100 | number:0 }}%
+            </td>
+            <td>
+                {{pshow.player.goals_for_percentage * 100 | number:0 }}%
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<a class="btn btn-primary" ui-sref="playerStandings">Back to Player Standings</a>

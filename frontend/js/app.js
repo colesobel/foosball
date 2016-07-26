@@ -51,4 +51,10 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
       controller: 'teamStatsController',
       controllerAs: 'ts'
     })
+    .state('playerShow', {
+      url: '/players/:id',
+      templateUrl: '/partials/player-show.html',
+      controller: 'playerShowController',
+      controllerAs: 'pshow'
+    })
 }])

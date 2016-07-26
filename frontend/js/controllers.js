@@ -115,3 +115,10 @@ angular.module('myApp.controllers', [])
   }
 
 }])
+
+.controller('playerShowController', ['$http', '$stateParams', function($http, $stateParams) {
+  var self = this
+  $http.get('http://localhost:3000/players/' + $stateParams.id).then(function(data) {
+    self.player = data.data
+  })
+}])
