@@ -2,7 +2,7 @@ var knex = require('../db/knex')
 
 var queries = {
   leagueStandings: function() {
-    return knex.raw(`select wins_losses.team_id, wins_losses.team_name, wins_losses.wins, wins_losses.losses, goals_for.goals_for, goals_against.goals_against,
+    return knex.raw(`select row_number() over (order by wins desc, losses, goals_for desc) as rank, wins_losses.team_id, wins_losses.team_name, wins_losses.wins, wins_losses.losses, goals_for.goals_for, goals_against.goals_against,
       (wins/(wins + case losses when 0 then 0.001 else losses end))::float as win_percentage,
       (goals_for/(goals_for + case goals_against when 0 then 0.001 else goals_against end))::float as goals_for_percentage
       from
@@ -50,12 +50,10 @@ var queries = {
       group by t.team_id, t.team_name
       ) goals_against
       group by team_id, team_name
-      ) goals_against on wins_losses.team_id = goals_against.team_id
-
-      order by wins desc, losses, goals_for desc`)
+      ) goals_against on wins_losses.team_id = goals_against.team_id`)
   },
   playerStandings: function() {
-    return knex.raw(`select wins_losses.player_id, wins_losses.name, wins_losses.wins, wins_losses.losses, goals.goals_for, goals.goals_against,
+    return knex.raw(`select row_number() over (order by wins desc, losses, goals_for desc) as rank, wins_losses.player_id, wins_losses.name, wins_losses.wins, wins_losses.losses, goals.goals_for, goals.goals_against,
       (wins/ (wins + case losses when 0 then 0.001 else losses end))::float as win_percentage,
       (goals_for / (goals_for + case goals_against when 0 then 0.001 else goals_against end))::float as goals_for_percentage
        from
@@ -109,9 +107,7 @@ var queries = {
 
       group by goals_for.name, goals_for.player_id
       order by goals_for desc, goals_against
-      ) goals on wins_losses.player_id = goals.player_id
-
-      order by wins desc, losses, goals_for desc`)
+      ) goals on wins_losses.player_id = goals.player_id`)
   }
 }
 

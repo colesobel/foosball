@@ -2,6 +2,9 @@
 
 <table class="table table-striped">
     <thead>
+        <th class="clickable" ng-click="ls.sortData(rank)">
+            Rank
+        </th>
         <th class="clickable" ng-click="ls.sortData(team_name)">
             Team Name
         </th>
@@ -26,6 +29,9 @@
     </thead>
     <tbody>
         <tr ng-repeat="team in ls.standings | orderBy: ls.sortColumn: ls.asc">
+            <td>
+                {{team.rank}}
+            </td>
             <td>
                 {{team.team_name}}
             </td>
