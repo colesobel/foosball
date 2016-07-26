@@ -9,6 +9,18 @@ router.post('/', function(req, res, next) {
   })
 });
 
+router.get('/:id', function(req, res, next) {
+  Teams.showOne(req.params.id).then(function(data) {
+    res.json(data.rows)
+  })
+});
+
+router.get('/getName/:id', function(req, res, next) {
+  Teams.getTeamName(req.params.id).then(function(data) {
+    res.json(data.rows[0].team_name)
+  })
+});
+
 
 
 

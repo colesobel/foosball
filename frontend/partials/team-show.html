@@ -1,0 +1,52 @@
+<p class="display-1 page-header">{{ts.teamName}} Stats</p>
+
+<table class="table table-striped">
+    <thead>
+        <th class="clickable" ng-click="ps.sortData('name')">
+            Team Name
+        </th>
+        <th class="clickable" ng-click="ps.sortData('wins')">
+            Wins Against
+        </th>
+        <th class="clickable" ng-click="ps.sortData('losses')">
+            Losses Against
+        </th>
+        <th class="clickable" ng-click="ps.sortData('goals_for')">
+            Goals-For
+        </th>
+        <th class="clickable" ng-click="ps.sortData('goals_against')">
+            Goals-Against
+        </th>
+        <th class="clickable" ng-click="ps.sortData('win_percentage')">
+            Win Percentage
+        </th>
+        <th class="clickable" ng-click="ps.sortData('goals_for_percentage')">
+            Goals-For Percentage
+        </th>
+    </thead>
+    <tbody>
+        <tr ng-repeat="team in ts.stats">
+            <td>
+                {{team.team_name}}
+            </td>
+            <td>
+                {{team.wins_against}}
+            </td>
+            <td>
+                {{team.losses_against}}
+            </td>
+            <td>
+                {{team.goals_for}}
+            </td>
+            <td>
+                {{team.goals_against}}
+            </td>
+            <td>
+                {{team.win_percentage * 100 | number:0}}%
+            </td>
+            <td>
+                {{team.goals_for_percentage * 100 | number:0 }}%
+            </td>
+        </tr>
+    </tbody>
+</table>

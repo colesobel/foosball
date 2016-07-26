@@ -98,7 +98,16 @@ angular.module('myApp.controllers', [])
   }
 }])
 
-.controller('teamStatsController', [function() {
+.controller('teamShowController', ['$http', '$stateParams', function($http, $stateParams) {
+  var self = this
+  $http.get('http://localhost:3000/teams/getName/' + $stateParams.id).then(function(data) {
+    self.teamName = data.data
+  })
+
+  $http.get('http://localhost:3000/teams/' + $stateParams.id).then(function(data) {
+    self.stats = data.data
+  })
+
 
 }])
 
