@@ -105,10 +105,12 @@ angular.module('myApp.controllers', [])
   })
 
   $http.get('http://localhost:3000/teams/' + $stateParams.id).then(function(data) {
-    self.stats = data.data
+    var stats = data.data
+    self.stats = stats.filter(function(team) {
+      return team.wins_against != 0 || team.losses_against != 0
+    })
   })
-
-
+    console.log(self.stats);
 }])
 
 .controller('playerStandingsController', ['$http', function($http) {
