@@ -108,7 +108,8 @@ var queries = {
       ) winning_goals_against on teams.team_id = winning_goals_against.team_id
       ) goals_against
       group by team_id
-      ) goals_against on all_teams.team_id = goals_against.team_id`)
+      ) goals_against on all_teams.team_id = goals_against.team_id
+      order by wins_against desc, losses_against`)
   },
   getTeamName: function(id) {
     return knex.raw(`select team_name from teams where team_id = ${id}`)

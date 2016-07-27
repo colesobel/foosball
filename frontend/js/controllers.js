@@ -110,7 +110,6 @@ angular.module('myApp.controllers', [])
       return team.wins_against != 0 || team.losses_against != 0
     })
   })
-    console.log(self.stats);
 }])
 
 .controller('playerStandingsController', ['$http', function($http) {
