@@ -21,6 +21,12 @@ router.get('/:id', function(req, res, next) {
   })
 });
 
+router.get('/:id/getStats', function(req, res, next) {
+  Players.showOne(req.params.id).then(function(players) {
+    res.json(players.rows)
+  })
+});
+
 
 
 

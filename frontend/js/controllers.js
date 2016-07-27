@@ -131,4 +131,11 @@ angular.module('myApp.controllers', [])
   $http.get('http://localhost:3000/players/' + $stateParams.id).then(function(data) {
     self.player = data.data
   })
+
+  $http.get(`http://localhost:3000/players/${$stateParams.id}/getStats`).then(function(data) {
+    self.stats = data.data.filter(function(player) {
+      return (player.wins_against != 0 || player.losses_against != 0)
+    })
+  })
+
 }])

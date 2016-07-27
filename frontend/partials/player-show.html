@@ -1,9 +1,9 @@
-<p class="display-1 page-header">{{pshow.player.name}}</p>
+<p class="display-1 page-header">{{pshow.player.name}}' Individual Stats</p>
 
 <table class="table table-striped">
     <thead>
         <th>
-            Team Name
+            Player Name
         </th>
         <th>
             Wins
@@ -51,4 +51,57 @@
     </tbody>
 </table>
 
-<a class="btn btn-primary" ui-sref="playerStandings">Back to Player Standings</a>
+<p class="display-1 page-header">{{pshow.player.name}} vs Others</p>
+
+<table class="table table-striped">
+    <thead>
+        <th>
+            Player Name
+        </th>
+        <th>
+            Wins
+        </th>
+        <th>
+            Losses
+        </th>
+        <th>
+            Goals-For
+        </th>
+        <th>
+            Goals-Against
+        </th>
+        <th>
+            Win Percentage
+        </th>
+        <th>
+            Goals-For Percentage
+        </th>
+    </thead>
+    <tbody>
+        <tr ng-repeat="person in pshow.stats">
+            <td>
+                {{person.name}}
+            </td>
+            <td>
+                {{person.wins_against}}
+            </td>
+            <td>
+                {{person.losses_against}}
+            </td>
+            <td>
+                {{person.goals_for}}
+            </td>
+            <td>
+                {{person.goals_against}}
+            </td>
+            <td>
+                {{person.win_percentage * 100 | number:0 }}%
+            </td>
+            <td>
+                {{person.goals_for_percentage * 100 | number:0 }}%
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<a class="btn btn-primary" ui-playerStandings">Back to Player Standings</a>
