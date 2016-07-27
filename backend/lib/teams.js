@@ -7,8 +7,8 @@ var queries = {
   showOne: function(id) {
     return knex.raw(`select all_teams.team_id, all_teams.team_name, coalesce(wins_against.wins_against,0) as wins_against, coalesce(losses_against.losses_against, 0) as losses_against,
       coalesce(goals_for.goals_for, 0) as goals_for, coalesce(goals_against.goals_against, 0) as goals_against,
-      (coalesce(wins_against, 0) / (coalesce(wins_against, 0) + coalesce(losses_against, 0.00${id})))::float as win_percentage,
-      (goals_for / (goals_for + case goals_against when 0 then 0.00${id} else goals_against end))::float as goals_for_percentage
+      (coalesce(wins_against, 0) / (coalesce(wins_against, 0) + coalesce(losses_against, 0.001)))::float as win_percentage,
+      (goals_for / (goals_for + case goals_against when 0 then 0.001 else goals_against end))::float as goals_for_percentage
 
       from
 
@@ -117,36 +117,3 @@ var queries = {
 }
 
 module.exports = queries
-
-
-
-
-
-
-// **********Query to get one teams goals**************
-// select sum(goals) as goals_for_team from (select sum(winning_goals) as goals
-// from games g
-// join teams t on g.winner_id = t.team_id
-// where t.team_name = 'DevRick'
-// and g.winner_id in (select team_id from teams where team_name = 'DevRick')
-// union
-// select sum(losing_goals)
-// from games g
-// join teams t on g.loser_id = t.team_id
-// where t.team_name = 'DevRick'
-// and g.loser_id in (select team_id from teams where team_name = 'DevRick')) as goals
-
-
-
-// *************Query to get goals against one team**************
-// select sum(goals) as goals_against_team from (select sum(losing_goals) as goals
-// from games g
-// join teams t on g.winner_id = t.team_id
-// where t.team_name = 'DevRick'
-// and g.winner_id in (select team_id from teams where team_name = 'DevRick')
-// union
-// select sum(winning_goals)
-// from games g
-// join teams t on g.loser_id = t.team_id
-// where t.team_name = 'DevRick'
-// and g.loser_id in (select team_id from teams where team_name = 'DevRick')) as goals
