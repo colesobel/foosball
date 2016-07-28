@@ -104,6 +104,12 @@ angular.module('myApp.controllers', [])
     self.teamName = data.data
   })
 
+  $http.get('http://localhost:3000/standings/team').then(function(data) {
+    self.teamRow = data.data.filter(function(team) {
+      return team.team_id == $stateParams.id
+    })
+  })
+
   $http.get('http://localhost:3000/teams/' + $stateParams.id).then(function(data) {
     var stats = data.data
     self.stats = stats.filter(function(team) {
@@ -135,6 +141,12 @@ angular.module('myApp.controllers', [])
   $http.get(`http://localhost:3000/players/${$stateParams.id}/getStats`).then(function(data) {
     self.stats = data.data.filter(function(player) {
       return (player.wins_against != 0 || player.losses_against != 0)
+    })
+  })
+
+  $http.get(`http://localhost:3000/players/${$stateParams.id}/vsTeams`).then(function(data) {
+    self.vsTeams = data.data.filter(function(team) {
+      return (team.wins != 0 || team.losses != 0)
     })
   })
 

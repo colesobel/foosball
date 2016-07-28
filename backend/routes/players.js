@@ -27,6 +27,11 @@ router.get('/:id/getStats', function(req, res, next) {
   })
 });
 
+router.get('/:id/vsTeams', function(req, res, next) {
+  Players.vsTeams(req.params.id).then(function(teams) {
+    res.json(teams.rows)
+  })
+});
 
 
 

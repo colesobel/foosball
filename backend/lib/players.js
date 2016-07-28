@@ -169,43 +169,87 @@ var players = {
       ) goals_against on goals_for.player_id = goals_against.player_id
 
       order by wins_against desc, losses_against`)
+  },
+  vsTeams: function(id) {
+    return knex.raw(`select all_teams.team_id, all_teams.team_name, coalesce(wins, 0) as wins, coalesce(losses, 0) as losses, coalesce(goals_for, 0) as goals_for, coalesce(goals_against, 0) as goals_against,
+      coalesce(wins, 0) / (coalesce(wins,0) + coalesce(case losses when 0 then 0.001 else losses end, 0.001))::float as win_percentage,
+      coalesce(goals_for, 0) / (coalesce(goals_for, 0) + coalesce(case goals_against when 0 then 0.001 else goals_against end, 0.001))::float as goals_for_percentage
+
+      from
+
+      (
+      select team_id, team_name
+      from teams
+      where player_one_id <> ${id} and player_two_id <> ${id}
+      ) all_teams
+
+      left join
+
+      (
+      select t.team_id, t.team_name, count(g.winner_id) as wins
+      from teams t
+      left join games g on t.team_id = g.loser_id
+      where player_one_id <> ${id} and player_two_id <> ${id}
+      and g.winner_id in (select team_id from teams where player_one_id = ${id} or player_two_id = ${id})
+      group by t.team_id, t.team_name
+      ) wins on all_teams.team_id = wins.team_id
+
+      left join
+
+      (
+      select t.team_id, t.team_name, count(g.loser_id) as losses
+      from teams t
+      left join games g on t.team_id = g.winner_id
+      where player_one_id <> ${id} and player_two_id <> ${id}
+      and g.loser_id in (select team_id from teams where player_one_id = ${id} or player_two_id = ${id})
+      group by t.team_id, t.team_name
+      ) losses on all_teams.team_id = losses.team_id
+
+      left join
+
+      (
+      select team_id, team_name, sum(winning_goals_for) as goals_for from (
+      select t.team_id, t.team_name, sum(g.winning_goals) as winning_goals_for
+      from teams t
+      left join games g on t.team_id = g.loser_id
+      where player_one_id <> ${id} and player_two_id <> ${id}
+      and g.winner_id in (select team_id from teams where player_one_id = ${id} or player_two_id = ${id})
+      group by t.team_id, t.team_name
+      union
+      select t.team_id, t.team_name, sum(g.losing_goals) as losing_goals_for
+      from teams t
+      left join games g on t.team_id = g.winner_id
+      where player_one_id <> ${id} and player_two_id <> ${id}
+      and g.loser_id in (select team_id from teams where player_one_id = ${id} or player_two_id = ${id})
+      group by t.team_id, t.team_name
+      ) goals
+      group by team_id, team_name
+      ) goals_for on all_teams.team_id = goals_for.team_id
+
+      left join
+
+      (
+      select team_id, team_name, sum(losing_goals_against) as goals_against from (
+      select t.team_id, t.team_name, sum(g.winning_goals) as losing_goals_against
+      from teams t
+      left join games g on t.team_id = g.winner_id
+      where player_one_id <> ${id} and player_two_id <> ${id}
+      and g.loser_id in (select team_id from teams where player_one_id = ${id} or player_two_id = ${id})
+      group by t.team_id, t.team_name
+      union
+      select t.team_id, t.team_name, sum(g.losing_goals) as winning_goals_against
+      from teams t
+      left join games g on t.team_id = g.loser_id
+      where player_one_id <> ${id} and player_two_id <> ${id}
+      and g.winner_id in (select team_id from teams where player_one_id = ${id} or player_two_id = ${id})
+      group by t.team_id, t.team_name
+      ) goals
+      group by team_id, team_name
+      ) goals_against on all_teams.team_id = goals_against.team_id
+
+      order by wins desc, losses`)
   }
 }
 
 
 module.exports = players
-
-// **************Query to get One Players Goals*************
-// select sum(goals) as goals_for_player from (select sum(winning_goals) as goals
-// from games g
-// join teams t on g.winner_id = t.team_id
-// join players p on t.player_one_id = p.player_id or t.player_two_id = p.player_id
-// where p.name = 'Cole'
-// and g.winner_id in (select team_id from teams where player_one_id = (select player_id from players where name = 'Cole')
-// or player_two_id = (select player_id from players where name = 'Cole'))
-// union
-// select sum(losing_goals)
-// from games g
-// join teams t on g.loser_id = t.team_id
-// join players p on t.player_one_id = p.player_id or t.player_two_id = p.player_id
-// where p.name = 'Cole'
-// and g.loser_id in (select team_id from teams where player_one_id = (select player_id from players where name = 'Cole')
-// or player_two_id = (select player_id from players where name = 'Cole'))) as goals
-
-
-// ***********Query to get goals against one player***********
-// select sum(goals) as goals_against_player from (select sum(losing_goals) as goals
-// from games g
-// join teams t on g.winner_id = t.team_id
-// join players p on t.player_one_id = p.player_id or t.player_two_id = p.player_id
-// where p.name = 'Devin'
-// and g.winner_id in (select team_id from teams where player_one_id = (select player_id from players where name = 'Devin')
-// or player_two_id = (select player_id from players where name = 'Devin'))
-// union
-// select sum(winning_goals)
-// from games g
-// join teams t on g.loser_id = t.team_id
-// join players p on t.player_one_id = p.player_id or t.player_two_id = p.player_id
-// where p.name = 'Devin'
-// and g.loser_id in (select team_id from teams where player_one_id = (select player_id from players where name = 'Devin')
-// or player_two_id = (select player_id from players where name = 'Devin'))) as goals
