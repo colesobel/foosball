@@ -116,6 +116,12 @@ angular.module('myApp.controllers', [])
       return team.wins_against != 0 || team.losses_against != 0
     })
   })
+
+  $http.get(`http://localhost:3000/teams/${$stateParams.id}/vsPlayers`).then(function(data) {
+    self.vsPlayers = data.data.filter(function(player) {
+      return player.wins != 0 || player.losses != 0
+    })
+  })
 }])
 
 .controller('playerStandingsController', ['$http', function($http) {

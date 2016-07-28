@@ -21,6 +21,15 @@ router.get('/getName/:id', function(req, res, next) {
   })
 });
 
+router.get('/:id/vsPlayers', function(req, res, next) {
+  Teams.vsPlayers(req.params.id).then(function(data) {
+    res.json(data.rows)
+  })
+});
+
+
+
+
 
 
 

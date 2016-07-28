@@ -51,8 +51,9 @@
     </tbody>
 </table>
 
+<br><br>
 
-<p class="display-1 page-header">{{ts.teamName}} Stats</p>
+<p class="display-1 page-header">{{ts.teamName}} vs Teams</p>
 
 <table class="table table-striped">
     <thead>
@@ -100,6 +101,61 @@
             </td>
             <td>
                 {{team.goals_for_percentage * 100 | number:0 }}%
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<br><br>
+
+<p class="display-1 page-header">{{ts.teamName}} vs Players</p>
+
+<table class="table table-striped">
+    <thead>
+        <th class="clickable" ng-click="ps.sortData('name')">
+            Player Name
+        </th>
+        <th class="clickable" ng-click="ps.sortData('wins')">
+            Wins Against
+        </th>
+        <th class="clickable" ng-click="ps.sortData('losses')">
+            Losses Against
+        </th>
+        <th class="clickable" ng-click="ps.sortData('goals_for')">
+            Goals-For
+        </th>
+        <th class="clickable" ng-click="ps.sortData('goals_against')">
+            Goals-Against
+        </th>
+        <th class="clickable" ng-click="ps.sortData('win_percentage')">
+            Win Percentage
+        </th>
+        <th class="clickable" ng-click="ps.sortData('goals_for_percentage')">
+            Goals-For Percentage
+        </th>
+    </thead>
+    <tbody>
+        <tr ng-repeat="person in ts.vsPlayers">
+            <td>
+                {{person.name}}
+            </td>
+            <td>
+                {{person.wins}}
+            </td>
+            <td>
+                {{person.losses}}
+            </td>
+            <td>
+                {{person.goals_for}}
+            </td>
+            <td>
+                {{person.goals_against}}
+            </td>
+            <td>
+                {{person.win_percentage * 100 | number:0}}%
+            </td>
+            <td>
+                {{person.goals_for_percentage * 100 | number:0 }}%
             </td>
         </tr>
     </tbody>
