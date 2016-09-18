@@ -48,10 +48,10 @@
                 {{player.goals_against}}
             </td>
             <td>
-                {{player.win_percentage * 100 | number:0}}%
+                {{player.win_percentage | percent}}
             </td>
             <td>
-                {{player.goals_for_percentage * 100 | number:0 }}%
+                {{player.goals_for_percentage | percent }}
             </td>
         </tr>
     </tbody>

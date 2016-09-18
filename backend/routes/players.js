@@ -34,6 +34,15 @@ router.get('/:id/vsTeams', function(req, res, next) {
 });
 
 
+router.get('/:id/goalsByGame', function(req, res, next) {
+  Players.goalsByGame(req.params.id).then(function(players) {
+    res.json(players.rows)
+  })
+});
+
+
+
+
 
 
 

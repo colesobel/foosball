@@ -27,6 +27,16 @@ router.get('/:id/vsPlayers', function(req, res, next) {
   })
 });
 
+router.get('/:id/goalsByGame', function(req, res, next) {
+  Teams.goalsByGame(req.params.id).then(function (games) {
+    res.json(games.rows)
+  })
+});
+
+
+
+
+
 
 
 

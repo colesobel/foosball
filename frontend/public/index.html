@@ -11,13 +11,14 @@
     <link href="css/bootstrap.css" rel="stylesheet">
     <!-- <link rel="stylesheet" href="/https://bootswatch.com/darkly/bootstrap.css" charset="utf-8"> -->
     <link href="css/style.css" rel="stylesheet">
+    <base href="/">
   </head>
 
   <body>
 
-    <nav class="navbar navbar-inverse">
+    <nav class="navbar navbar-inverse nav-fade">
       <div class="container">
-        <div class="navbar-header">
+        <div class="navbar-header nav-fade">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
             <span class="sr-only">Toggle navigation</span>
             <span class="icon-bar"></span>
@@ -29,11 +30,13 @@
         <div id="navbar" class="navbar-collapse collapse">
           <form class="navbar-form navbar-right">
             <div class="form-group">
-              <button type="submit" class="btn btn-primary navbar-item" ui-sref="leagueStandings">View League Standings</button>
-              <button type="submit" class="btn btn-primary navbar-item" ui-sref="playerStandings">View Player Standings</button>
+              <ul class="nav navbar-nav navbar-right">
+                <li><a ui-sref="leagueStandings">Team Standings</a></li>
+                <li><a ui-sref="playerStandings">Player Standings</a></li>
+              </ul>
             </div>
           </form>
-        </div><!--/.navbar-collapse -->
+        </div>
       </div>
     </nav>
 
@@ -44,9 +47,11 @@
     <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.js" charset="utf-8"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.3.1/angular-ui-router.js" charset="utf-8"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.2.1/Chart.js" charset="utf-8"></script>
     <script src="/js/bootstrap.js"></script>
     <script src="/js/controllers.js" charset="utf-8"></script>
     <script src="/js/services.js" charset="utf-8"></script>
+    <script src="/js/filters.js" charset="utf-8"></script>
     <script src="/js/app.js" charset="utf-8"></script>
   </body>
 </html>

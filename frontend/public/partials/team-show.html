@@ -152,11 +152,15 @@
                 {{person.goals_against}}
             </td>
             <td>
-                {{person.win_percentage * 100 | number:0}}%
+                {{person.win_percentage | percent}}
             </td>
             <td>
-                {{person.goals_for_percentage * 100 | number:0 }}%
+                {{person.goals_for_percentage | percent }}
             </td>
         </tr>
     </tbody>
 </table>
+
+<p class="display-1 page-header">Goals By Game</p>
+
+<canvas class="goals_graph" id="teamGoalsChart"></canvas>

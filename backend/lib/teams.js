@@ -198,6 +198,20 @@ var queries = {
       ) goals_against on all_players.player_id = goals_against.player_id
 
       order by wins desc, losses`)
+  },
+  goalsByGame: function(id) {
+    return knex.raw(`select game_id, row_number() over (order by game_id) as game_number, goals_for, goals_against from
+      (
+      select g.game_id, g.winning_goals as goals_for, g.losing_goals as goals_against
+      from games g
+      join teams t on g.winner_id = t.team_id
+      where g.winner_id = ${id}
+      union
+      select g.game_id, g.losing_goals, g.winning_goals
+      from games g
+      join teams t on g.loser_id = t.team_id
+      where g.loser_id = ${id}
+      ) games`)
   }
 }
 

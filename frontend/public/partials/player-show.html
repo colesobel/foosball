@@ -42,10 +42,10 @@
                 {{pshow.player.goals_against}}
             </td>
             <td>
-                {{pshow.player.win_percentage * 100 | number:0 }}%
+                {{pshow.player.win_percentage | percent}}
             </td>
             <td>
-                {{pshow.player.goals_for_percentage * 100 | number:0 }}%
+                {{pshow.player.goals_for_percentage | percent}}
             </td>
         </tr>
     </tbody>
@@ -95,10 +95,10 @@
                 {{team.goals_against}}
             </td>
             <td>
-                {{team.win_percentage * 100 | number:0 }}%
+                {{team.win_percentage | percent}}
             </td>
             <td>
-                {{team.goals_for_percentage * 100 | number:0 }}%
+                {{team.goals_for_percentage | percent}}
             </td>
         </tr>
     </tbody>
@@ -148,13 +148,15 @@
                 {{person.goals_against}}
             </td>
             <td>
-                {{person.win_percentage * 100 | number:0 }}%
+                {{person.win_percentage | percent }}
             </td>
             <td>
-                {{person.goals_for_percentage * 100 | number:0 }}%
+                {{person.goals_for_percentage | percent }}
             </td>
         </tr>
     </tbody>
 </table>
 
-<a class="btn btn-primary" ui-sref="playerStandings">Back to Player Standings</a>
+<p class="display-1 page-header">Goals By Game</p>
+
+<canvas class="goals_graph" id="playerGoalsChart"></canvas>

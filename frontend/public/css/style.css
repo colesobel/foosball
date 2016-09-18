@@ -1,3 +1,7 @@
+.nav-fade {
+  background: linear-gradient(#222222, #666666) !important;
+}
+
 .add-team-container {
   display: flex;
   flex-direction: column;
@@ -43,3 +47,18 @@
 .clickable {
   cursor: pointer;
 }
+
+.goals_graph {
+  height: 600px !important;
+  width: 1100px !important;
+}
+
+.modal-size {
+  height: 100vh !important;
+  width: 100vw !important;
+}
+
+/*.nav-fade {
+  background: linear-gradient(red, yellow) !important;
+  backgroun-color: green !important;
+}*/

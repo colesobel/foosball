@@ -1,6 +1,6 @@
-var app = angular.module('myApp', ['ui.router', 'myApp.controllers', 'myApp.services'])
+var app = angular.module('myApp', ['ui.router', 'myApp.controllers', 'myApp.services', 'myApp.filters'])
 
-app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
+app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', function($stateProvider, $urlRouterProvider, $locationProvider) {
   $urlRouterProvider.otherwise('home')
   $stateProvider
     .state('home', {
@@ -57,4 +57,6 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
       controller: 'playerShowController',
       controllerAs: 'pshow'
     })
+
+    $locationProvider.html5Mode(true);
 }])

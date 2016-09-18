@@ -248,6 +248,21 @@ var players = {
       ) goals_against on all_teams.team_id = goals_against.team_id
 
       order by wins desc, losses`)
+  },
+  goalsByGame: function (id) {
+    return knex.raw(`select game_id, row_number() over (order by game_id) as game_number, goals_for, goals_against from
+      (
+      select g.game_id, g.winning_goals as goals_for, g.losing_goals as goals_against
+      from games g
+      join teams t on g.winner_id = t.team_id
+      join players p on t.player_one_id = p.player_id or t.player_two_id = p.player_id
+      where g.winner_id in (select team_id from teams t join players p on t.player_one_id = p.player_id or t.player_two_id = p.player_id where p.player_id = ${id})
+      union
+      select g.game_id, g.losing_goals, g.winning_goals
+      from games g
+      join teams t on g.loser_id = t.team_id
+      where g.loser_id in (select team_id from teams t join players p on t.player_one_id = p.player_id or t.player_two_id = p.player_id where p.player_id = ${id})
+      ) games`)
   }
 }
 
